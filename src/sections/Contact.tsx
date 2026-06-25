@@ -5,7 +5,7 @@ import { SectionHeading, Reveal } from '../components';
 const channels = [
     { Icon: IconMail, label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
     { Icon: IconBrandLinkedin, label: 'LinkedIn', value: 'in/dedrickk', href: profile.linkedin },
-    { Icon: IconBrandGithub, label: 'GitHub', value: 'dedrickobo', href: profile.github },
+    { Icon: IconBrandGithub, label: 'GitHub', value: 'dedrickk', href: profile.github },
     { Icon: IconMapPin, label: 'Location', value: `${profile.location.split(',')[0]}, ${profile.timezone}`, href: null as string | null },
 ];
 

@@ -12,7 +12,7 @@ export const profile = {
   availability: "Open to DevOps / Cloud / SRE roles",
   email: "dedrickirl@gmail.com",
   linkedin: "https://www.linkedin.com/in/dedrickk/",
-  github: "https://github.com/dedrickobo",
+  github: "https://github.com/dedrickk",
   summary: `A results-driven DevOps engineer with a passion for automation, cloud infrastructure, and modern deployment practices. I specialize in solving complex problems across cloud computing, containerization, CI/CD pipelines, and system observability, building reliable and efficient systems and treating the work itself as the proof.`,
 };
 
