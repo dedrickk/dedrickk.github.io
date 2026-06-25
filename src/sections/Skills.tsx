@@ -1,83 +1,47 @@
-import { Container, Title, Text, Box, Group, SimpleGrid } from '@mantine/core';
+import type { ReactNode } from 'react';
 import {
-    IconCloud,
-    IconGitBranch,
-    IconBox,
-    IconSettings,
-    IconChartBar,
-    IconServer,
-    IconNetwork,
-    IconTools
+    IconCloud, IconGitBranch, IconBox, IconSettings, IconChartBar, IconServer, IconNetwork, IconTools,
 } from '@tabler/icons-react';
-import { motion } from 'framer-motion';
 import { skills } from '../data/profile';
+import { SectionHeading, Reveal, TechChip } from '../components';
 
-const categoryIcons: Record<string, React.ReactNode> = {
-    'Cloud Providers': <IconCloud size={24} />,
-    'CI/CD & Version Control': <IconGitBranch size={24} />,
-    'Containers & Orchestration': <IconBox size={24} />,
-    'Infrastructure as Code': <IconSettings size={24} />,
-    'Monitoring & Logging': <IconChartBar size={24} />,
-    'Systems & OS': <IconServer size={24} />,
-    'Networking': <IconNetwork size={24} />,
-    'Tools & Platforms': <IconTools size={24} />,
+const categoryIcons: Record<string, ReactNode> = {
+    'Cloud Providers': <IconCloud size={20} />,
+    'CI/CD & Version Control': <IconGitBranch size={20} />,
+    'Containers & Orchestration': <IconBox size={20} />,
+    'Infrastructure as Code': <IconSettings size={20} />,
+    'Monitoring & Observability': <IconChartBar size={20} />,
+    'Systems & OS': <IconServer size={20} />,
+    Networking: <IconNetwork size={20} />,
+    'Tools & Platforms': <IconTools size={20} />,
 };
 
 export function Skills() {
     return (
-        <Box component="section" id="skills" className="section">
-            <Container size="lg">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                >
-                    <Title className="section-title" mb="xl">Skills & Expertise</Title>
-                    <Text c="dimmed" size="lg" maw={600} mb="xl">
-                        A comprehensive toolkit for building and maintaining modern cloud infrastructure
-                    </Text>
-                </motion.div>
+        <section id="skills" className="section">
+            <div className="container">
+                <SectionHeading
+                    index="II"
+                    title="Arsenal"
+                    lead="The toolkit behind the work: cloud, automation, and observability, end to end."
+                />
 
-                <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }} spacing="lg" mt="xl">
-                    {Object.entries(skills).map(([category, skillList], index) => (
-                        <motion.div
-                            key={category}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            viewport={{ once: true }}
-                        >
-                            <Box className="glass-card" p="lg" h="100%">
-                                <Group gap="sm" mb="md" wrap="nowrap" align="flex-start">
-                                    <Box
-                                        style={{
-                                            color: 'var(--gradient-start)',
-                                            flexShrink: 0,
-                                        }}
-                                    >
-                                        {categoryIcons[category]}
-                                    </Box>
-                                    <Title order={5} fw={600} style={{ lineHeight: 1.3 }}>{category}</Title>
-                                </Group>
-
-                                <Box>
-                                    {skillList.map((skill) => (
-                                        <Box
-                                            key={skill}
-                                            className="skill-badge"
-                                            mr="xs"
-                                            mb="xs"
-                                        >
-                                            {skill}
-                                        </Box>
-                                    ))}
-                                </Box>
-                            </Box>
-                        </motion.div>
+                <div className="auto-grid" style={{ marginTop: '3rem' }}>
+                    {Object.entries(skills).map(([category, list], i) => (
+                        <Reveal key={category} delay={Math.min(i * 0.05, 0.3)}>
+                            <div className="panel" style={{ padding: '1.4rem', height: '100%' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6ch', marginBottom: '1rem' }}>
+                                    <span style={{ color: 'var(--blood)', display: 'flex' }}>{categoryIcons[category]}</span>
+                                    <h3 style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--bone)', margin: 0, lineHeight: 1.25 }}>{category}</h3>
+                                </div>
+                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                                    {list.map((skill) => <TechChip key={skill} label={skill} />)}
+                                </div>
+                            </div>
+                        </Reveal>
                     ))}
-                </SimpleGrid>
-            </Container>
-        </Box>
+                </div>
+            </div>
+        </section>
     );
 }

@@ -1,91 +1,62 @@
-import { Container, Text, Group, ActionIcon, Box, useMantineColorScheme } from '@mantine/core';
-import { IconBrandGithub, IconBrandLinkedin, IconSun, IconMoon } from '@tabler/icons-react';
-import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { IconBrandGithub, IconBrandLinkedin } from '@tabler/icons-react';
 import { profile } from '../data/profile';
 
-export function Navbar() {
-    const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-    const dark = colorScheme === 'dark';
+const navItems = ['About', 'Skills', 'Experience', 'Projects', 'Certifications', 'Contact'];
 
-    const navItems = ['About', 'Skills', 'Experience', 'Projects', 'Certifications', 'Contact'];
+export function Navbar() {
+    const [scrolled, setScrolled] = useState(false);
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 40);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
 
     return (
-        <motion.nav
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
+        <nav
             style={{
                 position: 'fixed',
                 top: 0,
                 left: 0,
                 right: 0,
                 zIndex: 100,
-                background: dark ? 'rgba(10, 10, 15, 0.8)' : 'rgba(248, 250, 252, 0.8)',
-                backdropFilter: 'blur(10px)',
-                borderBottom: '1px solid var(--border-color)',
+                background: scrolled ? 'color-mix(in oklch, var(--ink-0) 82%, transparent)' : 'transparent',
+                backdropFilter: scrolled ? 'blur(12px)' : 'none',
+                borderBottom: `1px solid ${scrolled ? 'var(--line)' : 'transparent'}`,
+                transition: 'background 0.3s var(--ease), border-color 0.3s var(--ease)',
             }}
         >
-            <Container size="lg" py="md">
-                <Group justify="space-between" align="center">
-                    {/* Left - Spacer for balanced layout */}
-                    <Box style={{ minWidth: '120px' }} />
+            <div
+                className="container"
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBlock: '1rem' }}
+            >
+                <a href="#hero" className="mono" style={{ fontWeight: 700, letterSpacing: '0.04em', color: 'var(--bone)' }}>
+                    <span style={{ color: 'var(--blood)' }}>✶</span> DEDRICK
+                </a>
 
-                    {/* Center - Navigation */}
-                    <Group gap="xl" visibleFrom="sm" style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
-                        {navItems.map((item) => (
-                            <Text
-                                key={item}
-                                component="a"
-                                href={`#${item.toLowerCase()}`}
-                                size="sm"
-                                c="dimmed"
-                                style={{
-                                    textDecoration: 'none',
-                                    transition: 'color 0.2s ease',
-                                }}
-                                onMouseOver={(e) => e.currentTarget.style.color = 'var(--gradient-start)'}
-                                onMouseOut={(e) => e.currentTarget.style.color = ''}
-                            >
-                                {item}
-                            </Text>
-                        ))}
-                    </Group>
+                <div className="nav-links mono" style={{ display: 'flex', gap: '1.4rem' }}>
+                    {navItems.map((item) => (
+                        <a
+                            key={item}
+                            href={`#${item.toLowerCase()}`}
+                            style={{ fontSize: '0.8rem', color: 'var(--ash)', transition: 'color 0.2s var(--ease)' }}
+                            onMouseOver={(e) => (e.currentTarget.style.color = 'var(--blood-bright)')}
+                            onMouseOut={(e) => (e.currentTarget.style.color = 'var(--ash)')}
+                        >
+                            {item}
+                        </a>
+                    ))}
+                </div>
 
-                    {/* Right - Social & Theme Toggle */}
-                    <Group gap="xs" style={{ minWidth: '120px', justifyContent: 'flex-end' }}>
-                        <ActionIcon
-                            variant="subtle"
-                            color="gray"
-                            component="a"
-                            href={profile.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="LinkedIn"
-                        >
-                            <IconBrandLinkedin size={20} />
-                        </ActionIcon>
-                        <ActionIcon
-                            variant="subtle"
-                            color="gray"
-                            component="a"
-                            href={profile.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="GitHub"
-                        >
-                            <IconBrandGithub size={20} />
-                        </ActionIcon>
-                        <ActionIcon
-                            variant="subtle"
-                            color="gray"
-                            onClick={toggleColorScheme}
-                            aria-label="Toggle color scheme"
-                        >
-                            {dark ? <IconSun size={20} /> : <IconMoon size={20} />}
-                        </ActionIcon>
-                    </Group>
-                </Group>
-            </Container>
-        </motion.nav>
+                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                    <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style={{ color: 'var(--ash)', display: 'flex' }}>
+                        <IconBrandLinkedin size={20} />
+                    </a>
+                    <a href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" style={{ color: 'var(--ash)', display: 'flex' }}>
+                        <IconBrandGithub size={20} />
+                    </a>
+                </div>
+            </div>
+        </nav>
     );
 }

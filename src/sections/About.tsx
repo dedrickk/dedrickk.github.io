@@ -1,81 +1,43 @@
-import { Container, Title, Text, Grid, Box, Group, Badge } from '@mantine/core';
-import { IconMapPin, IconBriefcase, IconSchool } from '@tabler/icons-react';
-import { motion } from 'framer-motion';
+import { IconMapPin, IconBriefcase } from '@tabler/icons-react';
 import { profile, education } from '../data/profile';
+import { SectionHeading, Reveal } from '../components';
 
 export function About() {
     return (
-        <Box component="section" id="about" className="section">
-            <Container size="lg">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                >
-                    <Title className="section-title" mb="xl">About Me</Title>
-                </motion.div>
+        <section id="about" className="section">
+            <div className="container">
+                <SectionHeading index="I" title="About" />
 
-                <Grid gutter="xl" mt="xl">
-                    <Grid.Col span={{ base: 12, md: 7 }}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            viewport={{ once: true }}
-                        >
-                            <Text
-                                size="lg"
-                                c="dimmed"
-                                style={{ lineHeight: 1.8 }}
-                                mb="xl"
-                            >
-                                {profile.summary}
-                            </Text>
+                <div className="split" style={{ marginTop: '3rem' }}>
+                    <Reveal delay={0.1}>
+                        <p className="pretty" style={{ fontSize: 'var(--fs-lead)', color: 'var(--ash)', lineHeight: 1.78, maxWidth: '60ch', margin: 0 }}>
+                            {profile.summary}
+                        </p>
+                        <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', marginTop: '2rem' }}>
+                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5ch', color: 'var(--ash)', fontSize: '0.9rem' }}>
+                                <IconMapPin size={18} style={{ color: 'var(--blood)' }} /> {profile.location}
+                            </span>
+                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5ch', color: 'var(--ash)', fontSize: '0.9rem' }}>
+                                <IconBriefcase size={18} style={{ color: 'var(--blood)' }} /> {profile.roleTitle} @ {profile.roleAt}
+                            </span>
+                        </div>
+                    </Reveal>
 
-                            <Group gap="lg" wrap="wrap">
-                                <Group gap="xs">
-                                    <IconMapPin size={18} color="var(--gradient-start)" />
-                                    <Text size="sm" c="dimmed">{profile.location}</Text>
-                                </Group>
-                                <Group gap="xs">
-                                    <IconBriefcase size={18} color="var(--gradient-start)" />
-                                    <Text size="sm" c="dimmed">DevOps Engineer @ OneByOne</Text>
-                                </Group>
-                            </Group>
-                        </motion.div>
-                    </Grid.Col>
-
-                    <Grid.Col span={{ base: 12, md: 5 }}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.4 }}
-                            viewport={{ once: true }}
-                        >
-                            <Box className="glass-card" p="xl">
-                                <Group gap="sm" mb="md">
-                                    <IconSchool size={24} color="var(--gradient-start)" />
-                                    <Title order={4}>Education</Title>
-                                </Group>
-
-                                <Text fw={600} mb={4}>{education.institution}</Text>
-                                <Text size="sm" c="dimmed" mb={4}>
-                                    {education.degree} in {education.field}
-                                </Text>
-                                <Group gap="sm" mt="sm">
-                                    <Badge variant="light" color="brand">
-                                        {education.period}
-                                    </Badge>
-                                    <Badge variant="light" color="accent">
-                                        GPA: {education.gpa}
-                                    </Badge>
-                                </Group>
-                            </Box>
-                        </motion.div>
-                    </Grid.Col>
-                </Grid>
-            </Container>
-        </Box>
+                    <Reveal delay={0.2}>
+                        <div className="panel" style={{ padding: '1.75rem' }}>
+                            <p className="mono" style={{ color: 'var(--ash-dim)', fontSize: '0.78rem', margin: '0 0 0.75rem' }}>// education</p>
+                            <p style={{ fontWeight: 700, color: 'var(--bone)', margin: 0 }}>{education.institution}</p>
+                            <p style={{ fontSize: '0.9rem', color: 'var(--ash)', margin: '0.35rem 0 0' }}>
+                                {education.degree} · {education.field}
+                            </p>
+                            <div className="mono" style={{ display: 'flex', gap: '1.5rem', marginTop: '1.25rem', fontSize: '0.8rem' }}>
+                                <span style={{ color: 'var(--ash-dim)' }}>{education.period}</span>
+                                <span style={{ color: 'var(--blood-bright)' }}>GPA {education.gpa}</span>
+                            </div>
+                        </div>
+                    </Reveal>
+                </div>
+            </div>
+        </section>
     );
 }
