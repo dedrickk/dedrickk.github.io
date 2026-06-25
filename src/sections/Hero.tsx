@@ -39,7 +39,7 @@ export function Hero() {
         <div style={{ position: 'relative' }}>
             <div style={{ position: 'relative', overflow: 'hidden', border: '1px solid var(--blood)', boxShadow: '0 0 60px oklch(0.33 0.14 24 / 0.5)' }}>
                 <img
-                    src="/saber-alter.gif"
+                    src="/saber-alter.webp"
                     alt="Saber Alter, Dedrick's chosen persona, rendered in black and white"
                     className="inked"
                     style={{ width: '100%', display: 'block' }}
