@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-/** Blood-red trailing cursor. Fine-pointer only; disabled for touch + reduced-motion. */
+/** Blood-red dot with a trailing ring. Fine-pointer only; off for touch + reduced-motion. */
 export function Cursor() {
     const ring = useRef<HTMLDivElement>(null);
     const dot = useRef<HTMLDivElement>(null);
@@ -13,7 +13,7 @@ export function Cursor() {
         const dEl = dot.current!;
         document.documentElement.classList.add('cursor-on');
 
-        let mx = -100, my = -100, rx = -100, ry = -100, hot = false, raf = 0;
+        let mx = -200, my = -200, rx = -200, ry = -200, hot = false, raf = 0;
 
         const onMove = (e: MouseEvent) => {
             mx = e.clientX;
@@ -25,9 +25,9 @@ export function Cursor() {
             hot = !!t?.closest('a, button, [data-hot]');
         };
         const loop = () => {
-            rx += (mx - rx) * 0.18;
-            ry += (my - ry) * 0.18;
-            rEl.style.transform = `translate3d(${rx - 15}px, ${ry - 15}px, 0) scale(${hot ? 1.7 : 1})`;
+            rx += (mx - rx) * 0.2;
+            ry += (my - ry) * 0.2;
+            rEl.style.transform = `translate3d(${rx - 16}px, ${ry - 16}px, 0) scale(${hot ? 1.7 : 1})`;
             rEl.classList.toggle('is-hot', hot);
             raf = requestAnimationFrame(loop);
         };

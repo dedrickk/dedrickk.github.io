@@ -192,21 +192,23 @@ hr.hairline { border: 0; border-top: 1px solid var(--line); margin: 0; }
 .btn-ghost { background: transparent; color: var(--bone); border-color: var(--line-2); }
 .btn-ghost:hover { border-color: var(--bone); }
 
-/* ── Custom cursor (JS-driven; transform/opacity only — no layout animation) ── */
+/* ── Custom cursor: dot + trailing ring (JS-positioned) ── */
 .cursor-on, .cursor-on a, .cursor-on button { cursor: none; }
 .cursor {
   position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none;
-  width: 30px; height: 30px; border-radius: 50%;
-  border: 1px solid var(--blood); mix-blend-mode: difference;
-  transform: translate3d(-100px, -100px, 0);
-  transition: background-color 0.25s var(--ease), opacity 0.25s var(--ease);
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1.5px solid var(--blood);
+  filter: drop-shadow(0 0 4px oklch(0.415 0.165 25 / 0.55));
+  transform: translate3d(-200px, -200px, 0);
+  transition: background-color 0.25s var(--ease), border-color 0.25s var(--ease);
   will-change: transform;
 }
-.cursor.is-hot { background: oklch(0.47 0.185 25 / 0.18); }
+.cursor.is-hot { background: oklch(0.415 0.165 25 / 0.18); border-color: var(--blood-bright); }
 .cursor-dot {
   position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none;
   width: 6px; height: 6px; border-radius: 50%; background: var(--blood-bright);
-  transform: translate3d(-100px, -100px, 0); will-change: transform;
+  filter: drop-shadow(0 0 3px oklch(0.415 0.165 25 / 0.7));
+  transform: translate3d(-200px, -200px, 0); will-change: transform;
 }
 
 /* ── Focus / scrollbar ── */
