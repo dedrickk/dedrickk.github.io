@@ -85,7 +85,7 @@ export const projects = [
     title: "aform",
     kind: "DevOps Platform",
     featured: true,
-    period: "2026 · Apple DevOps Institute",
+    period: "2026",
     role: "DevOps / Platform Engineer",
     diagram: "aform" as const,
     summary:
@@ -119,7 +119,7 @@ export const projects = [
     title: "procal-infra",
     kind: "Cloud Platform · IaC",
     featured: true,
-    period: "2026 · Apple DevOps Institute",
+    period: "2026",
     role: "Infrastructure Engineer",
     diagram: "procal" as const,
     summary:

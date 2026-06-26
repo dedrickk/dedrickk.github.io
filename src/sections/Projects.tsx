@@ -11,7 +11,7 @@ export function Projects() {
                 <SectionHeading
                     index="IV"
                     title="Work"
-                    lead="Two recent platform builds at the institute, plus selected earlier work. Identifiers are sanitized; the engineering is real."
+                    lead="Two recent platform builds, plus selected earlier work. Identifiers are sanitized; the engineering is real."
                 />
 
                 <div style={{ marginTop: '3.5rem' }}>
